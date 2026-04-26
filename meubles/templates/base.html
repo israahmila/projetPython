@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Aurelia Interiors | Gestion Stock{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #be9975;
+            --text-dark: #222222;
+            --text-gray: #666666;
+            --bg-light: #F9F9F9;
+        }
+        body {
+            font-family: 'Jost', sans-serif;
+            color: var(--text-dark);
+            background-color: #FFFFFF;
+        }
+        /* Top bar */
+        .top-bar {
+            background-color: #F8F8F8;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            padding: 8px 0;
+            border-bottom: 1px solid #EEEEEE;
+        }
+        /* Navbar */
+        .navbar-brand {
+            font-weight: 500;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--text-dark) !important;
+            text-transform: uppercase;
+        }
+        .nav-link {
+            color: var(--text-gray) !important;
+            font-weight: 400;
+            font-size: 1.1rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-dark) !important;
+        }
+        .btn-primary-bronze {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 24px;
+            font-weight: 500;
+        }
+        .btn-primary-bronze:hover {
+            background-color: #a88562;
+            color: #fff;
+        }
+        .btn-outline-bronze {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+            border-radius: 4px;
+            padding: 8px 24px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .btn-outline-bronze:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        .search-input {
+            border-radius: 20px;
+            background-color: #F8F8F8;
+            border: none;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light py-3 border-bottom">
+    <div class="container">
+        <!-- Logo Text representing the image -->
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'meuble:meuble_list' %}">
+            <img src="{% static 'img/logoAurelia.png' %}" alt="Aurelia Interiors" style="height: 45px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'meuble:meuble_list' %}">Meubles</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'meuble:categorie_list' %}">Catégories</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'meuble:fournisseur_list' %}">Fournisseurs</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container mt-5 mb-5 pb-5">
+    {% block content %}{% endblock %}
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

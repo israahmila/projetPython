@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .form-container { max-width: 600px; margin: 0 auto; }
+    .clean-input { border: none; border-bottom: 1px solid #ddd; border-radius: 0; padding: 12px 0; background: transparent; transition: 0.3s; box-shadow: none !important; font-family: 'Jost', sans-serif;}
+    .clean-input:focus { border-bottom-color: var(--primary-color); }
+    .form-label { font-weight: 500; color: #444; margin-top: 15px; font-size:0.9rem;}
+    .form-title { font-weight: 400; font-size: 2.2rem; margin-bottom: 2rem; text-align: center; }
+</style>
+<div class="form-container">
+    <h2 class="form-title">{% if form.instance.pk %}Modifier la catégorie{% else %}Créer une nouvelle catégorie{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-3">
+            <label class="form-label text-uppercase">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div class="d-flex justify-content-center gap-3 mt-5">
+            <a href="javascript:history.back()" class="btn btn-outline-bronze px-5 py-2">ANNULER</a>
+            <button type="submit" class="btn btn-primary-bronze px-5 py-2">ENREGISTRER </button>
+        </div>
+    </form>
+</div>
+<script>
+    document.querySelectorAll('input, select, textarea').forEach(el => el.classList.add('form-control', 'clean-input'));
+</script>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .category-pill {
+        background-color: #F5F5F5;
+        border-radius: 4px;
+        padding: 6px 16px;
+        color: #666;
+        text-decoration: none;
+        font-size: 0.9rem;
+        border: none;
+    }
+    .category-pill:hover, .category-pill.active {
+        background-color: #E8E8E8;
+        color: #222;
+    }
+    .product-card { border: none; }
+    .product-card img {
+        border-radius: 8px;
+        height: 280px;
+        object-fit: cover;
+    }
+    .product-card .card-body { padding: 1rem 0; }
+    .heart-icon { position: absolute; top: 15px; right: 15px; color: #555; font-size: 1.2rem; cursor: pointer; background: white; border-radius: 50%; width: 30px; height: 30px; display:flex; justify-content:center; align-items:center;}
+    .product-title {
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: var(--text-dark);
+        margin-bottom: 5px;
+    }
+    .product-price { font-size: 1.1rem; font-weight: 600; color: var(--text-dark); }
+    .sidebar-title { font-weight: 500; font-size: 1.1rem; margin-bottom: 1rem; }
+    .btn-admin-floating { position: absolute; top: 15px; left: 15px; opacity: 0; transition: 0.3s;}
+    .product-card:hover .btn-admin-floating { opacity: 1; }
+</style>
+
+<div class="row">
+    <div class="d-flex justify-content-between align-items-center mb-5 mt-3">
+    <h2 style="font-weight: 400;">Tous les meubles</h2>
+    <a href="{% url 'meuble:meuble_add' %}" class="btn btn-primary-bronze px-4">Ajouter un meuble</a>
+</div>
+
+    <!-- Main Content -->
+    <div class="col-lg-12">
+        
+        
+
+        
+
+        {% if meubles %}
+        <div class="row g-4">
+            {% for meuble in meubles %}
+            <div class="col-md-6 col-xl-4">
+                <div class="card product-card position-relative">
+                    <a href="{% url 'meuble:meuble_detail' meuble.pk %}" class="text-decoration-none">
+                    {% if meuble.image %}
+                    <img src="{{ meuble.image.url }}" class="card-img-top" alt="{{ meuble.nom }}">
+                    {% else %}
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center text-muted" style="height: 280px; border-radius: 8px;">Pas d'image</div>
+                    {% endif %}
+                    </a>
+                    
+                    
+                    <div class="btn-admin-floating">
+                        <a href="{% url 'meuble:meuble_edit' meuble.pk %}" class="btn btn-sm btn-light shadow-sm text-warning"><i class="bi bi-pencil"></i></a>
+                        <a href="{% url 'meuble:meuble_delete' meuble.pk %}" class="btn btn-sm btn-light shadow-sm text-danger ms-1"><i class="bi bi-trash"></i></a>
+                    </div>
+                    
+                    <a href="{% url 'meuble:meuble_detail' meuble.pk %}" class="text-decoration-none">
+                    <div class="card-body">
+                        <h5 class="product-title">{{ meuble.nom }}</h5>
+                        <p class="product-price mb-0">{{ meuble.prix }} DT </p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-light border">Aucun meuble en stock.</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

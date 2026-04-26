@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center mt-5 text-center">
+    <div class="col-md-6">
+        <h2 class="mb-4" style="font-weight: 300;">Action Requise</h2>
+        <p class="lead text-muted mb-5">Êtes-vous sûr de vouloir supprimer cet article du catalogue de manière permanente ?</p>
+        
+        <div class="d-flex align-items-center justify-content-center p-4 mb-5 mx-auto border rounded" style="max-width: 400px; border-color: #eee;">
+            {% if meuble.image %}
+            <img src="{{ meuble.image.url }}" alt="meuble" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; margin-right: 20px;">
+            {% endif %}
+            <div class="text-start">
+                <h5 class="mb-1" style="font-weight: 500;">{{ meuble.nom }}</h5>
+                <span class="text-muted">{{ meuble.prix }} DT</span>
+            </div>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex justify-content-center gap-3">
+               <a href="javascript:history.back()" class="btn btn-outline-bronze px-5 py-2">ANNULER</a>
+               <button type="submit" class="btn btn-primary-bronze px-5 py-2 border-0" style="background-color: #222;">CONFIRMER LA SUPPRESSION</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

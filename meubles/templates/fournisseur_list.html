@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-5 mt-3">
+    <h2 style="font-weight: 400;">Fournisseurs</h2>
+    <a href="{% url 'meuble:fournisseur_add' %}" class="btn btn-primary-bronze px-4">Ajouter un fournisseur</a>
+</div>
+{% if fournisseurs %}
+<div class="row g-4">
+    {% for f in fournisseurs %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 p-4" style="border-radius: 0; border: 1px solid #EEE; box-shadow: none;">
+            <div class="card-body p-0">
+                <h4 class="mb-4" style="font-weight: 400;">{{ f.nom }}</h4>
+                <p class="text-muted mb-2" style="font-size:0.95rem;">Contact : <span class="text-dark">{{ f.contact|default:"N/A" }}</span></p>
+                <p class="text-muted" style="font-size:0.95rem;">Adresse : <span class="text-dark">{{ f.adresse|default:"Non spécifié" }}</span></p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 p-0 mt-4 d-flex justify-content-end gap-3">
+                <a href="{% url 'meuble:fournisseur_edit' f.pk %}" class="text-muted text-decoration-none"><i class="bi bi-pencil"></i></a>
+                <a href="{% url 'meuble:fournisseur_delete' f.pk %}" class="text-muted text-decoration-none"><i class="bi bi-trash"></i></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-muted">Aucun fournisseur enregistré.</p>
+{% endif %}
+{% endblock %}
