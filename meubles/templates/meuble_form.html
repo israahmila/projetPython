@@ -30,8 +30,15 @@
 </div>
 <script>
     document.querySelectorAll('input, select, textarea').forEach(el => {
-        if(el.type !== 'file' && el.type !== 'checkbox') el.classList.add('form-control', 'clean-input');
-        else el.classList.add('form-control');
+        if(el.type !== 'file' && el.type !== 'checkbox') {
+            el.classList.add('form-control', 'clean-input');
+        } else if (el.type === 'file') {
+            el.classList.add('form-control');
+        } else if (el.type === 'checkbox') {
+            el.classList.add('form-check-input');
+            el.style.marginLeft = "10px";
+            el.style.cursor = "pointer";
+        }
     });
 </script>
 {% endblock %}
